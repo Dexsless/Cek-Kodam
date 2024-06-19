@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Kodam Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('./meme.jpg') no-repeat center center fixed;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            position: relative;
+            border: #0056b3;
+            border-style: double;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #898989;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #007BFF;
+            animation: spin 1s ease infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Generator Kodam</h1>
+        <form id="kodamForm">
+            <label for="nameInput">Masukkan Nama:</label>
+            <input type="text" id="nameInput" name="name" required>
+            <button type="submit">Generate Kodam</button>
+        </form>
+        <div id="result" class="hidden"></div>
+        <div id="spinner" class="spinner hidden"></div>
+    </div>
+    <script>
+        document.getElementById('kodamForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('nameInput').value;
+            const resultDiv = document.getElementById('result');
+            const spinner = document.getElementById('spinner');
+
+            if (name) {
+                spinner.classList.remove('hidden');
+                resultDiv.classList.add('hidden');
+                setTimeout(() => {
+                    const kodam = generateKodam();
+                    resultDiv.innerHTML = `Nama: ${name}<br>Kodam: ${kodam}`;
+                    resultDiv.classList.remove('hidden');
+                    resultDiv.style.borderColor = 'green';
+                    spinner.classList.add('hidden');
+                }, 2000); // Simulate a delay for the loading animation
+            } else {
+                resultDiv.innerHTML = "Nama tidak boleh kosong.";
+                resultDiv.classList.remove('hidden');
+                resultDiv.style.borderColor = 'red';
+            }
+        });
+
+        function generateKodam() {
+            const kodamList = [
+                'Naga Kepala 3',
+                'Sapu Lidi',
+                'Mas Faiz',
+                'Iblis Bertanduk',
+                'Lancelot Mode Hitam',
+                'Pahlawan keseleo',
+                'Eat Sambel',
+                'Kaki Mata Ikan',
+                'Turub Termos',
+                'Upin Ipin',
+                'Boboiboy Api',
+                'Kagenou Cidd',
+                'Vga RTX',
+                'Spongebob Squarepants',
+                'Doraemon',
+                'Kapten Pahlawan',
+                'Pahlawan Kepala 3',
+                'Nyi roro Kidul',
+                'Kakarot',
+                'SG OPM',
+                'SG Ketupat',
+                'Jembatan Suramadu',
+                'Star Platinum',
+                'Mas Rusdi',
+                'Icikiwir',
+                'Mouse RGB',
+                'Kotak Amal',
+                'Keranda Terbang',
+                'Zeus Gacor'
+            ];
+            const randomIndex = Math.floor(Math.random() * kodamList.length);
+            return kodamList[randomIndex];
+        }
+    </script>
+</body>
+
+</html>
